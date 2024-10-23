@@ -2,41 +2,48 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 console.log('Attempting to create database connection pool...');
+console.log('Connection details:', {
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    user: process.env.MYSQL_USER,
+    database: process.env.MYSQL_DATABASE
+    // not logging password for security
+});
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    connectTimeout: 60000, // Increase timeout to 60 seconds
     ssl: {
-        rejectUnauthorized: true
-    },
-    // Add additional connection settings
-    enableKeepAlive: true,
-    keepAliveInitialDelay: 0
+        rejectUnauthorized: false
+    }
 }).promise();
 
-// Test the connection with timeout handling
+
+// Testing connection
 const testConnection = async () => {
     try {
         console.log('Testing database connection...');
-        await pool.query('SELECT 1');
-        console.log('Database connection successful');
+        const [result] = await pool.query('SELECT 1');
+        console.log('Database connection successful:', result);
+        return true;
     } catch (err) {
         console.error('Database connection failed:', {
             message: err.message,
             code: err.code,
-            errno: err.errno
+            errno: err.errno,
+            port: process.env.MYSQL_PORT
         });
-        // Don't exit the process, but log the error
-        console.error('Please check your database credentials and network connection');
+        return false;
     }
 };
 
-testConnection();
-
-module.exports = pool;
+module.exports = {
+    pool,
+    testConnection
+};
