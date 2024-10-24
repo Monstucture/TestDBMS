@@ -10,11 +10,6 @@ require('dotenv').config();
 app.use(express.json());
 app.use(cors());
 
-// Basic health check route
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok' });
-});
-
 // Routers
 const employeeRouter = require('./routes/employee');
 

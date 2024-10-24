@@ -2,13 +2,6 @@ const mysql = require('mysql2');
 require('dotenv').config();
 
 console.log('Attempting to create database connection pool...');
-console.log('Connection details:', {
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    user: process.env.MYSQL_USER,
-    database: process.env.MYSQL_DATABASE
-    // not logging password for security
-});
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
@@ -25,7 +18,7 @@ const pool = mysql.createPool({
 }).promise();
 
 
-// Testing connection
+// Testing connection (/test)
 const testConnection = async () => {
     try {
         console.log('Testing database connection...');
