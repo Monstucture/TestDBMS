@@ -12,9 +12,13 @@ app.use(cors());
 
 // Routers
 const employeeRouter = require('./routes/employee');
+const authRouter = require('./routes/auth');
+const itemsRouter = require('./routes/shop');
 
 // Use Routes
 app.use('/employee', employeeRouter);
+app.use('/auth', authRouter);
+app.use('/shop', itemsRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

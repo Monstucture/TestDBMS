@@ -22,12 +22,12 @@ router.get('/test', async (req, res) => {
 // Get all employees
 router.get('/', async (req, res) => {
     try {
-        console.log('Attempting to fetch employees...');
+        // console.log('Attempting to fetch employees...');
         const [rows] = await pool.query(`
             SELECT *
             FROM employee
         `);
-        console.log('Successfully fetched employees:', rows.length);
+        // console.log('Successfully fetched employees:', rows.length);
         res.json(rows);
     } catch (error) {
         console.error('Error fetching employees:', {
