@@ -125,12 +125,17 @@ npm test    # Run tests
 
 ### Backend (.env)
 ```env
-MYSQL_HOST - MySQL database host
-MYSQL_USER - MySQL database user
-MYSQL_PASSWORD - MySQL database password
-MYSQL_DATABASE - MySQL database name
-MYSQL_PORT - MySQL database port
-JWT_SECRET - Secret key for JWT tokens
+MYSQL_HOST = MySQL database host
+MYSQL_USER = MySQL database user
+MYSQL_PASSWORD = MySQL database password
+MYSQL_DATABASE = MySQL database name
+MYSQL_PORT = MySQL database port
+JWT_SECRET = 8888
+```
+### Frontend (.env)
+```env
+REACT_APP_ENV='development'
+REACT_APP_API_URL='http://localhost:5000'   
 ```
 
 ## API Endpoints
@@ -146,6 +151,10 @@ JWT_SECRET - Secret key for JWT tokens
 ### Customers
 - GET `/customer` - Get all customers
 - GET `/customer/:id` - Get customer by ID
+
+- ### Shop
+- GET `/shop/all-flavors` - Get all customers
+- GET `/shop/all-flavors/:id` - Get customer by ID
 
 ## Common Issues & Troubleshooting
 
